@@ -5,6 +5,10 @@ import Player.*;
 import java.util.Random;
 
 public class Chance extends BankOwned {
+    public Chance(int loc) {
+        super(loc);
+    }
+
     public void chanceGame(Player player) {
         int rand = (int) (Math.random() * 7);
         if (rand == 0) {

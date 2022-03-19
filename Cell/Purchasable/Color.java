@@ -1,4 +1,5 @@
 package Cell.Purchasable;
 
-public enum Color{
+public enum Color {
+    green, red, blue, yellow
 }

@@ -23,6 +23,7 @@ public class Player {
         money = 1500;
         location = 0;
         estates = new ArrayList<Cell.Purchasable.Purchasable>();
+        bonuses = new ArrayList<Bonus>();
     }
 
     boolean sell() {
