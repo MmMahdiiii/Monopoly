@@ -3,6 +3,8 @@ import Cell.BankOwned.BankOwned;
 import Cell.Cell;
 import Cell.Purchasable.Purchasable;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Player {
         public final String name;
         public int money;
@@ -18,7 +20,17 @@ public class Player {
         boolean sell(){
             if (!estatePrint())
                 return false;
-
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("pls enter a index to sell!");
+            int index = scanner.nextInt();
+            while (index < 1 || index > estates.size()) {
+                System.out.println("your chosen number is invalid pls try again:");
+                index = scanner.nextInt();
+            }
+            money += estates.get(index - 1).value / 2;
+            estates.get(index - 1).owner = null;
+            estates.remove(index - 1);
+            return true;
         }
         boolean buy(Cell cell){
             if(cell instanceof BankOwned) {
@@ -49,8 +61,9 @@ public class Player {
         int index (){
             return location + 1;
         }
-        String property(){
-
+        public void property(){
+            System.out.println("Left money : " + money + "$");
+            estatePrint();
         }
         private boolean estatePrint(){
             if (estates.size() == 0){
