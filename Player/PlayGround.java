@@ -13,9 +13,9 @@ public class PlayGround {
         this.players = players;
     }
 
-    Cell[] cells = new Cell[24];
+    static Cell[] cells = new Cell[24];
 
-    {
+    static{
         cells[0] = new Parcking(0);
         cells[1] = new Land(1, 100, Color.green);
         cells[2] = new Airport(2);
