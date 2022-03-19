@@ -1,4 +1,4 @@
 package Cell.BankOwned;
 
-public class Tax extends BankOwned{
+public class Tax extends BankOwned {
 }
