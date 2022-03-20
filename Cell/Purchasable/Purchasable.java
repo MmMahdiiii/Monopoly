@@ -4,7 +4,7 @@ import Player.Player;
 
 public abstract class Purchasable extends Cell.Cell {
     public double value;
-    public Player owner;
+    public Player owner=null;
     public Color color;
 
     public Purchasable(int location, double value, Color color) {
