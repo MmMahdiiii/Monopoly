@@ -11,8 +11,8 @@ public class Player {
     public final String name;
     public int money;
     public int location;
-    private ArrayList<Cell.Purchasable.Purchasable> estates;
-    private ArrayList<Bonus> bonuses;
+    public ArrayList<Cell.Purchasable.Purchasable> estates=new ArrayList<Cell.Purchasable.Purchasable>();
+    private ArrayList<Bonus> bonuses=new ArrayList<Bonus>();
 
     public void giveBonus(Bonus bonus) {
         bonuses.add(bonus);
@@ -58,7 +58,7 @@ public class Player {
         return true;
     }
 
-    private boolean payment(double price) {
+    public boolean payment(double price) {
         if (price > money) {
             System.out.println("Sorry but you have not enough money!");
             if (estates.size() > 0)
