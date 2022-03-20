@@ -7,7 +7,7 @@ import Cell.Purchasable.*;
 import Cell.Purchasable.Land;
 
 public class PlayGround {
-    PlayGround map=new PlayGround();
+    static PlayGround map=new PlayGround();
     private PlayGround() {
 
     }
