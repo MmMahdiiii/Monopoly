@@ -7,15 +7,14 @@ import Cell.Purchasable.*;
 import Cell.Purchasable.Land;
 
 public class PlayGround {
-    Player[] players;
+    PlayGround map=new PlayGround();
+    private PlayGround() {
 
-    public PlayGround(Player... players) {
-        this.players = players;
     }
 
-    static Cell[] cells = new Cell[24];
+     Cell[] cells = new Cell[24];
 
-    static{
+    {
         cells[0] = new Parcking(0);
         cells[1] = new Land(1, 100, Color.green);
         cells[2] = new Airport(2);
@@ -40,5 +39,9 @@ public class PlayGround {
         cells[21] = new Cinema(121, 200, Color.yellow);
         cells[22] = new Land(22, 100, Color.blue);
         cells[23] = new Chance(23);
+    }
+
+    public PlayGround getMap() {
+        return map;
     }
 }
