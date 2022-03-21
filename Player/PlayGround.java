@@ -12,7 +12,7 @@ public class PlayGround {
 
     }
 
-     Cell[] cells = new Cell[24];
+     public Cell[] cells = new Cell[24];
 
     {
         cells[0] = new Parcking(0);
@@ -41,7 +41,7 @@ public class PlayGround {
         cells[23] = new Chance(23);
     }
 
-    public PlayGround getMap() {
+    public static PlayGround getMap() {
         return map;
     }
 }
