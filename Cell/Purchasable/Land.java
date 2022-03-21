@@ -29,21 +29,23 @@ public class Land extends Purchasable {
                 if (player.payment(150)) {
                     this.buildings++;
                     System.out.println("The building has been built.");
+                    return true;
                 } else {
-                    System.out.println("Sorry you don't have enough money.");
+                    return false;
                 }
-                return;
             }
             if (this.buildings == 4) {
                 if (player.payment(100)) {
                     this.buildings = -1;
                     System.out.println("Buildings are converted to Hotel.");
+                    return true;
                 } else {
-                    System.out.println("Sorry you don't have enough money.");
+                    return false;
                 }
             }
-        } else {
-            System.out.println("You can't build duo to others lands limit.");
         }
+            System.out.println("You can't build duo to others lands limit.");
+            return false;
+
     }
 }

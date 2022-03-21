@@ -25,7 +25,9 @@ public abstract class Cell {
         return itsNoAvailable();
     }
 
-    public abstract boolean invest();
+    public  boolean invest(){
+        return itsNoAvailable();
+    }
 
     public boolean itsNoAvailable() {
         System.out.println("This action is not available!");
