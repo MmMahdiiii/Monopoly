@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Player {
     public final String name;
-    public int money;
+    public double money;
     public int location;
     public ArrayList<Cell.Purchasable.Purchasable> estates=new ArrayList<Cell.Purchasable.Purchasable>();
     private ArrayList<Bonus> bonuses=new ArrayList<Bonus>();
