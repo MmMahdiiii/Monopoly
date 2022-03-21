@@ -61,10 +61,6 @@ public class Player {
     public boolean payment(double price) {
         if (price > money) {
             System.out.println("Sorry but you have not enough money!");
-            if (estates.size() > 0)
-                System.out.println("You can sell yor estates!");
-            else
-                System.out.println("and you do not have any estate to sell!");
             return false;
         }
         money -= price;
