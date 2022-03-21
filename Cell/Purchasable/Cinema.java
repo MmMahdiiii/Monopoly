@@ -9,7 +9,8 @@ public class Cinema extends Purchasable{
     }
     public int getTicket(){
        int result=25;
-       result*=cinemaCounter()*2;
+       if(cinemaCounter()!=0)
+           result*=cinemaCounter()*2;
        return result;
     }
     public int cinemaCounter(){
@@ -20,6 +21,6 @@ public class Cinema extends Purchasable{
                 if (((Cinema) map.cells[i]).owner.equals(this.owner))
                     result++;
         }
-        return result;
+        return --result;
     }
 }
