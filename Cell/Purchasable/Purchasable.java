@@ -12,4 +12,5 @@ public abstract class Purchasable extends Cell.Cell {
         this.value = value;
         this.color = color;
     }
+
 }
