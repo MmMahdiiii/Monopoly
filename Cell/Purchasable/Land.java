@@ -2,8 +2,6 @@ package Cell.Purchasable;
 
 import Player.Player;
 
-import static Player.Bonus.escapeFromTax;
-
 public class Land extends Purchasable {
     public int buildings = 0;//-1 means Hotel
 
@@ -21,11 +19,11 @@ public class Land extends Purchasable {
     }
 
     @Override
-    public void build(Player player) {
+    public boolean build(Player player) {
         if (buildNumCheck(player)) {
             if (this.buildings == -1) {
                 System.out.println("Sorry you can't build anymore.");
-                return;
+                return false;
             }
             if (this.buildings < 4) {
                 if (player.payment(150)) {
