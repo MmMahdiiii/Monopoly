@@ -17,15 +17,15 @@ public abstract class Cell {
         return itsNoAvailable();
     }
 
-    public boolean fly() {
+    public boolean fly(Player player, int destination) {
         return itsNoAvailable();
     }
 
-    public boolean free(){
+    public boolean free() {
         return itsNoAvailable();
     }
 
-    public  boolean invest(){
+    public boolean invest(Player player) {
         return itsNoAvailable();
     }
 
