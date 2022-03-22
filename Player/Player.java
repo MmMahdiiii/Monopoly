@@ -93,6 +93,20 @@ public class Player {
         }
         return true;
     }
+    public boolean canPay(double price) {
+        if (wholeCredit()<price){
+            return false;
+        }
+        return true;
+    }
+    public double wholeCredit() {
+        double result=this.money;
+        for (Purchasable estate : this.estates) {
+            result += estate.value;
+        }
+        return result;
+
+    }
 }
 
 
