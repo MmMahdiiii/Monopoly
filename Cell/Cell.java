@@ -1,10 +1,6 @@
 package Cell;
 
-import Cell.BankOwned.Airport;
-import Cell.Purchasable.Land;
 import Player.Player;
-
-import javax.print.attribute.PrintRequestAttribute;
 
 public abstract class Cell {
     public int location;
@@ -17,15 +13,15 @@ public abstract class Cell {
         return itsNoAvailable();
     }
 
-    public boolean fly() {
+    public boolean fly(Player player, int destination) {
         return itsNoAvailable();
     }
 
-    public boolean free(){
+    public boolean free(Player player) {
         return itsNoAvailable();
     }
 
-    public  boolean invest(){
+    public boolean invest(Player player) {
         return itsNoAvailable();
     }
 
