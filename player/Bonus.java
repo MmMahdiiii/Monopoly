@@ -1,4 +1,4 @@
-package Player;
+package player;
 
 public enum Bonus {
     escapeFromDungeon,
