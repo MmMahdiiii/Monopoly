@@ -13,6 +13,7 @@ public class Player {
     public int location;
     public ArrayList<Cell.Purchasable.Purchasable> estates = new ArrayList<Cell.Purchasable.Purchasable>();
     private ArrayList<Bonus> bonuses = new ArrayList<Bonus>();
+    public static ArrayList<Player> allPlayers = new ArrayList<Player>();
 
     public void giveBonus(Bonus bonus) {
         bonuses.add(bonus);
