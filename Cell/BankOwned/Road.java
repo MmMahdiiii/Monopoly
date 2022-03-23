@@ -1,4 +1,4 @@
-package Cell.BankOwned;
+package cell.BankOwned;
 
 public class Road extends BankOwned{
     public Road(int loc) {

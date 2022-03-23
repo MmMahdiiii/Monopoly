@@ -1,8 +1,8 @@
-package Cell.Purchasable;
+package cell.Purchasable;
 
 import Player.Player;
 
-public abstract class Purchasable extends Cell.Cell {
+public abstract class Purchasable extends cell.Cell {
     public double value;
     public Player owner=null;
     public Color color;

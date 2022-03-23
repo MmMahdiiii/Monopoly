@@ -1,8 +1,8 @@
 package Player;
 
-import Cell.BankOwned.BankOwned;
-import Cell.Cell;
-import Cell.Purchasable.Purchasable;
+import cell.BankOwned.BankOwned;
+import cell.Cell;
+import cell.Purchasable.Purchasable;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -11,7 +11,7 @@ public class Player {
     public final String name;
     public double money;
     public int location;
-    public ArrayList<Cell.Purchasable.Purchasable> estates = new ArrayList<Cell.Purchasable.Purchasable>();
+    public ArrayList<cell.Purchasable.Purchasable> estates = new ArrayList<cell.Purchasable.Purchasable>();
     private ArrayList<Bonus> bonuses = new ArrayList<Bonus>();
     public static ArrayList<Player> allPlayers = new ArrayList<Player>();
 
@@ -23,7 +23,7 @@ public class Player {
         this.name = name;
         money = 1500;
         location = 0;
-        estates = new ArrayList<Cell.Purchasable.Purchasable>();
+        estates = new ArrayList<cell.Purchasable.Purchasable>();
         bonuses = new ArrayList<Bonus>();
     }
 

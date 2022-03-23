@@ -1,8 +1,6 @@
-package Cell.BankOwned;
+package cell.BankOwned;
 
 import Player.*;
-
-import java.util.Random;
 
 public class Chance extends BankOwned {
     public Chance(int loc) {

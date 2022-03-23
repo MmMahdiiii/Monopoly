@@ -1,4 +1,4 @@
-package Cell.Purchasable;
+package cell.Purchasable;
 
 import Player.*;
 
