@@ -1,7 +1,7 @@
-package cell.Purchasable;
+package cell.purchasable;
 
 
-import Player.PlayGround;
+import player.PlayGround;
 
 public class Cinema extends Purchasable{
     public Cinema(int location, double value, Color color) {

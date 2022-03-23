@@ -1,6 +1,6 @@
-package cell.BankOwned;
+package cell.bankOwned;
 
-import Player.Player;
+import player.Player;
 
 public class Airport extends BankOwned {
     public Airport(int loc) {

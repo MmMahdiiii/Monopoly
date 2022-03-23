@@ -1,6 +1,6 @@
-package cell.Purchasable;
+package cell.purchasable;
 
-import Player.Player;
+import player.Player;
 
 public abstract class Purchasable extends cell.Cell {
     public double value;

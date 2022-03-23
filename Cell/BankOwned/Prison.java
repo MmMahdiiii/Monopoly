@@ -1,6 +1,6 @@
-package cell.BankOwned;
+package cell.bankOwned;
 
-import Player.*;
+import player.*;
 
 import java.util.ArrayList;
 

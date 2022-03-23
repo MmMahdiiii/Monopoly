@@ -1,6 +1,6 @@
 package cell;
 
-import Player.Player;
+import player.Player;
 
 public abstract class Cell {
     public int location;

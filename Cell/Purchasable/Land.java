@@ -1,6 +1,6 @@
-package cell.Purchasable;
+package cell.purchasable;
 
-import Player.*;
+import player.*;
 
 
 public class Land extends Purchasable {

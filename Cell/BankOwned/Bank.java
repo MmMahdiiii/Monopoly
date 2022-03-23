@@ -1,6 +1,6 @@
-package cell.BankOwned;
+package cell.bankOwned;
 
-import Player.*;
+import player.*;
 
 public class Bank extends BankOwned{
     public Bank(int loc) {
