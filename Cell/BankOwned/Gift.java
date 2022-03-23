@@ -1,4 +1,4 @@
-package cell.bankOwned;
+package Cell.bankOwned;
 
 public class Gift extends BankOwned{
     public Gift(int loc) {

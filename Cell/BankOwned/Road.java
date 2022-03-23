@@ -1,4 +1,4 @@
-package cell.bankOwned;
+package Cell.bankOwned;
 
 public class Road extends BankOwned{
     public Road(int loc) {

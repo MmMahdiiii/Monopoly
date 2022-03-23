@@ -1,4 +1,4 @@
-package cell;
+package Cell;
 
 public interface Payment {
 

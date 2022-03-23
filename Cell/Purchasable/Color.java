@@ -1,4 +1,4 @@
-package cell.purchasable;
+package Cell.purchasable;
 
 public enum Color {
     green, red, blue, yellow

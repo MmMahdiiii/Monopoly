@@ -1,6 +1,6 @@
-package cell.bankOwned;
+package Cell.bankOwned;
 
-public abstract class BankOwned extends cell.Cell{
+public abstract class BankOwned extends Cell.Cell{
     public BankOwned(int loc) {
         super(loc );
     }
