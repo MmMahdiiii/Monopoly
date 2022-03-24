@@ -5,6 +5,7 @@ import cell.Cell;
 import cell.purchasable.Purchasable;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Player {
@@ -19,7 +20,7 @@ public class Player {
         bonuses.add(bonus);
     }
 
-   public Player(String name) {
+    public Player(String name) {
         this.name = name;
         money = 1500;
         location = 0;
@@ -94,19 +95,37 @@ public class Player {
         }
         return true;
     }
+
     public boolean canPay(double price) {
-        if (wholeCredit()<price){
+        if (wholeCredit() < price) {
             return false;
         }
         return true;
     }
+
     public double wholeCredit() {
-        double result=this.money;
+        double result = this.money;
         for (Purchasable estate : this.estates) {
             result += estate.value;
         }
         return result;
+    }
 
+    public boolean haveToSellSomething(int cost) {
+        return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return name.equals(player.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }
 

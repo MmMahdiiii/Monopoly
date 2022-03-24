@@ -1,7 +1,7 @@
 package cell;
 
 import player.Player;
-
+import cell.*;
 public abstract class Cell {
     public int location;
 
@@ -28,5 +28,8 @@ public abstract class Cell {
     public boolean itsNoAvailable() {
         System.out.println("This action is not available!");
         return false;
+    }
+    public boolean toDo(Player player) throws Lose{
+        return true;
     }
 }
