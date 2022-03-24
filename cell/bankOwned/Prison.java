@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Prison extends BankOwned {
 
-    ArrayList<Player> prisoners = new ArrayList<Player>();
+    public static ArrayList<Player> prisoners = new ArrayList<Player>();
 
     public Prison(int loc) {
         super(loc);
@@ -24,8 +24,7 @@ public class Prison extends BankOwned {
         System.out.println("You are not in dungeon!!!");
         return false;
     }
-
-    public boolean putInPrison(Player player) {
+    public static boolean putInPrison(Player player) {
         if (prisoners.contains(player))
             return false;
         prisoners.add(player);
