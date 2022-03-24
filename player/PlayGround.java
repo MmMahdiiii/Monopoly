@@ -1,10 +1,10 @@
 package player;
 
-import Cell.bankOwned.Parcking;
-import Cell.Cell;
-import Cell.bankOwned.*;
-import Cell.purchasable.*;
-import Cell.purchasable.Land;
+import cell.bankOwned.Parcking;
+import cell.Cell;
+import cell.bankOwned.*;
+import cell.purchasable.*;
+import cell.purchasable.Land;
 
 public class PlayGround {
     static PlayGround map=new PlayGround();
