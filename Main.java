@@ -1,7 +1,10 @@
+import player.PlayGround;
 import player.Player;
 
+import java.lang.invoke.SerializedLambda;
 import java.util.Scanner;
-
+import player.*;
+import cell.*;
 import static player.Player.allPlayers;
 
 public class Main {
@@ -28,21 +31,23 @@ public class Main {
                     throw new RuntimeException();
                 if (scanner.next().equals("min"))
                     break;
-                else throw new RuntimeException();
+                else
+                    throw new RuntimeException();
             } catch (RuntimeException e) {
                 System.out.println("Wrong Format,Please write game limit with 'Time x min' format.");
             }
         }
         System.out.println("Enter player's name (at least 2 , at last 4 players) then write 'start_game'.");
-        outerLoop:
-        while (true) {
+        outerLoop: while (true) {
             if (allPlayers.size() < 4) {
                 String temp = scanner.next();
                 if (temp.equals("start_game")) {
                     if (allPlayers.size() < 2)
                         System.out.println("Players size is too low, please add more players then write start game.");
-                    else break;
-                } else allPlayers.add(new player.Player(temp));
+                    else
+                        break;
+                } else
+                    allPlayers.add(new player.Player(temp));
             } else {
                 System.out.println("Players capacity is full, Please write 'start_game'.");
                 while (true) {
@@ -54,5 +59,46 @@ public class Main {
                 }
             }
         }
+        /*
+         * {
+         * allplayer... sort
+         * 1 5 6 4
+         * 6 5 4 1
+         * }
+         */
+        int round = 1;
+        System.out.println("round : " + round);
+        boolean time = true;
+        for (int i = 0; Player.allPlayers.size() > 1 && time; i++) {
+            if (i == Player.allPlayers.size()) {
+                i = 0;
+                round++;
+                System.out.println("round : " + round);
+            }
+            while (true) {
+                try {
+                    int dice = scanner.nextInt();
+                    if (dice < 0 || dice > 6)
+                        new Exception();
+                    break;
+                } catch (Exception e) {
+                    System.out.println("pls enter a valid number!");
+                }
+            }
+            Player p = Player.allPlayers.get(i);
+            try {
+                p.location += 6;
+                if (p.location > 23)
+                    p.location -= 24;
+                int loc = p.location;
+                PlayGround.getMap().cells[loc].toDo(p);
+            } catch (Lose lose) {
+                System.out.println(lose.getMessage());
+                System.out.println(p.name + " Losed!");
+                Player.allPlayers.remove(p);
+            }
+
+        }
+
     }
 }
