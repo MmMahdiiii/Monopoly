@@ -12,7 +12,7 @@ public class Player {
     public final String name;
     public double money;
     public int location;
-    public ArrayList<Cell.purchasable.Purchasable> estates = new ArrayList<Cell.purchasable.Purchasable>();
+    public ArrayList<cell.purchasable.Purchasable> estates = new ArrayList<cell.purchasable.Purchasable>();
     private ArrayList<Bonus> bonuses = new ArrayList<Bonus>();
     public static ArrayList<Player> allPlayers = new ArrayList<Player>();
 
@@ -24,7 +24,7 @@ public class Player {
         this.name = name;
         money = 1500;
         location = 0;
-        estates = new ArrayList<Cell.purchasable.Purchasable>();
+        estates = new ArrayList<cell.purchasable.Purchasable>();
         bonuses = new ArrayList<Bonus>();
     }
 
