@@ -2,7 +2,7 @@ package cell.bankOwned;
 
 import cell.Lose;
 import player.*;
-
+import cell.Lose;
 public class Chance extends BankOwned {
     public Chance(int loc) {
         super(loc);
