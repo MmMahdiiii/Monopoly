@@ -1,4 +1,4 @@
-package Cell;
+package cell;
 
 import player.Player;
 

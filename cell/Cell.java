@@ -1,7 +1,7 @@
 package cell;
 
 import player.Player;
-import cell.*;
+
 public abstract class Cell {
     public int location;
 

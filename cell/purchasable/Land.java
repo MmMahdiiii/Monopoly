@@ -1,4 +1,4 @@
-package Cell.purchasable;
+package cell.purchasable;
 
 import player.*;
 

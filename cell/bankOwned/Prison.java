@@ -1,4 +1,4 @@
-package Cell.bankOwned;
+package cell.bankOwned;
 
 import player.*;
 
@@ -6,10 +6,15 @@ import java.util.ArrayList;
 
 public class Prison extends BankOwned {
 
-    ArrayList<Player> prisoners = new ArrayList<Player>();
+    public static ArrayList<Player> prisoners = new ArrayList<Player>();
 
     public Prison(int loc) {
         super(loc);
+    }
+
+    @Override
+    public boolean toDo(Player player) {
+        return true;
     }
 
     @Override
@@ -25,7 +30,7 @@ public class Prison extends BankOwned {
         return false;
     }
 
-    public boolean putInPrison(Player player) {
+    public static boolean putInPrison(Player player) {
         if (prisoners.contains(player))
             return false;
         prisoners.add(player);
