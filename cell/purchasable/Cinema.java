@@ -1,9 +1,7 @@
-package cell.purchasable;
+package Cell.purchasable;
 
 
-import cell.Lose;
 import player.PlayGround;
-import player.Player;
 
 public class Cinema extends Purchasable{
     public Cinema(int location, double value, Color color) {
@@ -24,18 +22,5 @@ public class Cinema extends Purchasable{
                     result++;
         }
         return --result;
-    }
-
-    @Override
-    public boolean toDo(Player player) throws Lose {
-        if (player.equals(owner))
-            return true;
-        int cost = getTicket();
-        if (!player.canPay(cost))
-            throw new Lose();
-        while (!player.payment(cost)){
-            player.haveToSellSomething(cost);
-        }
-        return true;
     }
 }

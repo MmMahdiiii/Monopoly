@@ -1,4 +1,4 @@
-package cell.bankOwned;
+package Cell.bankOwned;
 
 import player.Player;
 
