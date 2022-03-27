@@ -29,6 +29,8 @@ public class Prison extends BankOwned {
         if (prisoners.contains(player))
             return false;
         prisoners.add(player);
+        player.moveTo(12);
+        System.out.println("Welcome to the dungeon!");
         return true;
     }
 }

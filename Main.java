@@ -1,3 +1,4 @@
+import cell.bankOwned.Prison;
 import player.PlayGround;
 import player.Player;
 
@@ -85,13 +86,21 @@ public class Main {
                     dice = scanner.nextInt();
                     if (dice < 0 || dice > 6)
                         throw new Exception();
+                    if(dice == 6){
+                        System.out.println("Nice! you can roll dice again!");
+                        dice += scanner.nextInt();
+                    }
                     break;
                 } catch (Exception e) {
                     System.out.println("pls enter a valid number!");
                 }
             }
+
             Player p = Player.allPlayers.get(i);
             System.out.println(p.name + " left money : " + p.money + "$");
+            if(dice == 12){
+                Prison.putInPrison(p);
+            }
             try {
                 p.location += dice;
                 if (p.location > 23)
@@ -115,9 +124,16 @@ public class Main {
                 System.out.println(lose.getMessage());
                 System.out.println(p.name + " Lost!");
                 Player.allPlayers.remove(p);
+                Player.losers.add(p);
             }
 
         }
-
+        if(Player.allPlayers.size() == 1){
+            // mamad win
+        }
+        else
+        {
+            // time over
+        }
     }
 }
