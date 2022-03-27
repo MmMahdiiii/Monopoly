@@ -75,9 +75,10 @@ public class Main {
                 round++;
                 System.out.println("round : " + round);
             }
+            int dice;
             while (true) {
                 try {
-                    int dice = scanner.nextInt();
+                     dice = scanner.nextInt();
                     if (dice < 0 || dice > 6)
                         new Exception();
                     break;
@@ -87,7 +88,7 @@ public class Main {
             }
             Player p = Player.allPlayers.get(i);
             try {
-                p.location += 6;
+                p.location += dice;
                 if (p.location > 23)
                     p.location -= 24;
                 int loc = p.location;
