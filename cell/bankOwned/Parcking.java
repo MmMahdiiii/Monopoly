@@ -6,8 +6,4 @@ public class Parcking extends BankOwned {
     public Parcking(int loc) {
         super(loc);
     }
-    @Override
-    public boolean toDo(Player player){
-        return true;
-    }
 }

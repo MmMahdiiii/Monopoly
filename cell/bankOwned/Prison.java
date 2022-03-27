@@ -13,11 +13,6 @@ public class Prison extends BankOwned {
     }
 
     @Override
-    public boolean toDo(Player player) {
-        return true;
-    }
-
-    @Override
     public boolean free(Player player) {
         if (prisoners.contains(player)) {
             if (player.payment(50.0)) {

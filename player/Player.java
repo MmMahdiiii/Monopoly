@@ -4,6 +4,7 @@ import cell.bankOwned.BankOwned;
 import cell.Cell;
 import cell.purchasable.Purchasable;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -15,6 +16,7 @@ public class Player {
     public ArrayList<cell.purchasable.Purchasable> estates = new ArrayList<cell.purchasable.Purchasable>();
     private ArrayList<Bonus> bonuses = new ArrayList<Bonus>();
     public static ArrayList<Player> allPlayers = new ArrayList<Player>();
+    public Double fund = null;
 
     public void giveBonus(Bonus bonus) {
         bonuses.add(bonus);
@@ -29,9 +31,7 @@ public class Player {
     }
 
     public boolean sell(int index) {
-        if (!estatePrint())
-            return false;
-        while (index < 1 || index > estates.size()) {
+        if (index < 1 || index > 24){
             System.out.println("your chosen number is invalid pls try again:");
         }
         Cell tempCell=PlayGround.getMap().cells[index-1];
@@ -41,13 +41,13 @@ public class Player {
         }
         else {
             if (!((Purchasable) tempCell).owner.equals(this)){
-                System.out.println("This item Doesn't belong you.");
+                System.out.println("This item doesn't belong you.");
                 return false;
             }
         }
-        money += estates.get(index - 1).value / 2;
-        estates.get(index - 1).owner = null;
-        estates.remove(index - 1);
+        money += ((Purchasable) tempCell).value / 2;
+        ((Purchasable) tempCell).owner = null;
+        estates.remove(tempCell);
         return true;
     }
 

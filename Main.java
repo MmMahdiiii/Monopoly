@@ -3,8 +3,10 @@ import player.Player;
 
 import java.lang.invoke.SerializedLambda;
 import java.util.Scanner;
+
 import player.*;
 import cell.*;
+
 import static player.Player.allPlayers;
 
 public class Main {
@@ -38,7 +40,8 @@ public class Main {
             }
         }
         System.out.println("Enter player's name (at least 2 , at last 4 players) then write 'start_game'.");
-        outerLoop: while (true) {
+        outerLoop:
+        while (true) {
             if (allPlayers.size() < 4) {
                 String temp = scanner.next();
                 if (temp.equals("start_game")) {
@@ -75,33 +78,38 @@ public class Main {
                 round++;
                 System.out.println("round : " + round);
             }
+            System.out.println("turn " + allPlayers.get(i).name);
             int dice;
             while (true) {
                 try {
-                     dice = scanner.nextInt();
+                    dice = scanner.nextInt();
                     if (dice < 0 || dice > 6)
-                        new Exception();
+                        throw new Exception();
                     break;
                 } catch (Exception e) {
                     System.out.println("pls enter a valid number!");
                 }
             }
             Player p = Player.allPlayers.get(i);
+            System.out.println(p.name + " left money : " + p.money + "$");
             try {
                 p.location += dice;
                 if (p.location > 23)
                     p.location -= 24;
                 int loc = p.location;
-                System.out.println("You can command your method.");
-                String method= scanner.next();
-                if (method.substring(0,5).equals("build"))
-                    PlayGround.getMap().cells[Integer.parseInt(method.substring(6))].build(p);
-                else if (method.substring(0,4).equals("sell"))
-                    p.sell(Integer.parseInt(method.substring(5)));
-                else if (method.substring(0,3).equals("fly"))
-                    PlayGround.getMap().cells[loc].fly(p,Integer.parseInt(method.substring(4)));
-                else if (method.substring(0,3).equals("buy"))
-                    p.buy(PlayGround.getMap().cells[Integer.parseInt(method.substring(4))]);
+                System.out.println("You can command your method then enter \"Quit\" for end your tasks.");
+                String method = scanner.next();
+                while (!method.equalsIgnoreCase("Quit")) {
+                    if (method.startsWith("build"))
+                        PlayGround.getMap().cells[Integer.parseInt(method.substring(6)) - 1].build(p);
+                    else if (method.startsWith("sell"))
+                        p.sell(Integer.parseInt(method.substring(5)));
+                    else if (method.startsWith("fly"))
+                        PlayGround.getMap().cells[loc].fly(p, Integer.parseInt(method.substring(4)));
+                    else if (method.startsWith("buy"))
+                        p.buy(PlayGround.getMap().cells[Integer.parseInt(method.substring(4)) - 1]);
+                    method = scanner.next();
+                }
                 PlayGround.getMap().cells[loc].toDo(p);
             } catch (Lose lose) {
                 System.out.println(lose.getMessage());
