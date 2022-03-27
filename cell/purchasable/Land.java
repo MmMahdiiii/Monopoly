@@ -1,5 +1,6 @@
 package cell.purchasable;
 
+import cell.Lose;
 import player.*;
 
 
@@ -73,6 +74,19 @@ public class Land extends Purchasable {
                 if (!((Purchasable) map.cells[i]).owner.equals(this.owner))
                     return false;
             }
+        }
+        return true;
+    }
+    @Override
+    public boolean toDo(Player player) throws Lose {
+        if (player.equals(owner))
+            return true;
+        int cost=calculateRent();
+        if (!player.canPay(cost)){
+            throw new Lose();
+        }
+        while (!player.payment(cost)){
+            player.haveToSellSomething(cost);
         }
         return true;
     }
