@@ -92,10 +92,20 @@ public class Main {
                 if (p.location > 23)
                     p.location -= 24;
                 int loc = p.location;
+                System.out.println("You can command your method.");
+                String method= scanner.next();
+                if (method.substring(0,5).equals("build"))
+                    PlayGround.getMap().cells[Integer.parseInt(method.substring(6))].build(p);
+                else if (method.substring(0,4).equals("sell"))
+                    p.sell(Integer.parseInt(method.substring(5)));
+                else if (method.substring(0,3).equals("fly"))
+                    PlayGround.getMap().cells[loc].fly(p,Integer.parseInt(method.substring(4)));
+                else if (method.substring(0,3).equals("buy"))
+                    p.buy(PlayGround.getMap().cells[Integer.parseInt(method.substring(4))]);
                 PlayGround.getMap().cells[loc].toDo(p);
             } catch (Lose lose) {
                 System.out.println(lose.getMessage());
-                System.out.println(p.name + " Losed!");
+                System.out.println(p.name + " Lost!");
                 Player.allPlayers.remove(p);
             }
 
