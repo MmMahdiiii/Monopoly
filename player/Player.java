@@ -28,15 +28,22 @@ public class Player {
         bonuses = new ArrayList<Bonus>();
     }
 
-    boolean sell() {
+    public boolean sell(int index) {
         if (!estatePrint())
             return false;
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("pls enter a index to sell!");
-        int index = scanner.nextInt();
         while (index < 1 || index > estates.size()) {
             System.out.println("your chosen number is invalid pls try again:");
-            index = scanner.nextInt();
+        }
+        Cell tempCell=PlayGround.getMap().cells[index-1];
+        if (!(tempCell instanceof Purchasable)){
+            System.out.println("This item isn't purchasable");
+            return false;
+        }
+        else {
+            if (!((Purchasable) tempCell).owner.equals(this)){
+                System.out.println("This item Doesn't belong you.");
+                return false;
+            }
         }
         money += estates.get(index - 1).value / 2;
         estates.get(index - 1).owner = null;
@@ -44,7 +51,7 @@ public class Player {
         return true;
     }
 
-    boolean buy(Cell cell) {
+    public boolean buy(Cell cell) {
         if (cell instanceof BankOwned) {
             System.out.println("You can not buy bank's estates!");
             return false;
