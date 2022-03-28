@@ -13,9 +13,8 @@ import static player.Player.allPlayers;
 public class Main {
     public static void main(String[] args) {
         int timeLimit = 0;
-        Scanner scanner = new Scanner(System.in);
-        System.out.println(scanner.next());
         System.out.println("Write 'create_game' to create a game.");
+        Scanner scanner = new Scanner(System.in);
         while (true) {
             if (scanner.next().equals("create_game")) {
                 break;
@@ -24,15 +23,15 @@ public class Main {
             }
         }
         System.out.println("Enter game's time limit with 'Time x min' format which x is your desired time.");
+        scanner.nextLine();
+
         while (true) {
             try {
-                if (!scanner.next().equals("Time"))
+                String  temp=scanner.nextLine();
+                if (!temp.startsWith("Time"))
                     throw new RuntimeException();
-                if (scanner.hasNextInt())
-                    timeLimit = scanner.nextInt();
-                else
-                    throw new RuntimeException();
-                if (scanner.next().equals("min"))
+                timeLimit=Integer.parseInt(temp.substring(5,temp.indexOf("min")-1));
+                if (temp.contains("min"))
                     break;
                 else
                     throw new RuntimeException();
@@ -72,8 +71,10 @@ public class Main {
          */
         int round = 1;
         System.out.println("round : " + round);
-        boolean time = true;
-        for (int i = 0; Player.allPlayers.size() > 1 && time; i++) {
+        long startTime=System.nanoTime();
+        long endTime=System.nanoTime()+timeLimit* 2L;
+        boolean onTime = true;
+        for (int i = 0; Player.allPlayers.size() > 1 && endTime-startTime/60000000000L<timeLimit; i++) {
             if (i == Player.allPlayers.size()) {
                 i = 0;
                 round++;
@@ -126,7 +127,7 @@ public class Main {
                 Player.allPlayers.remove(p);
                 Player.losers.add(p);
             }
-
+            endTime=System.nanoTime();
         }
         if(Player.allPlayers.size() == 1){
             // mamad win
