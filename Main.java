@@ -118,6 +118,19 @@ public class Main {
                         PlayGround.getMap().cells[loc].fly(p, Integer.parseInt(method.substring(4)));
                     else if (method.startsWith("buy"))
                         p.buy(PlayGround.getMap().cells[Integer.parseInt(method.substring(4)) - 1]);
+                    else if (method.equalsIgnoreCase("index"))
+                        System.out.println(p.location+1);
+                    else if (method.equalsIgnoreCase("property")){
+                        p.estatePrint();
+                    }
+                    else if(method.equalsIgnoreCase("time"))
+                        System.out.printf("remaining time= %d\n",timeLimit-System.nanoTime()-startTime);
+                    else if (method.equalsIgnoreCase("rank")){
+                        System.out.println(p.name+"'s rank is "+p.ranking());
+                    }
+                    else System.out.println("Wrong method format.");
+
+
                     method = scanner.next();
                 }
                 PlayGround.getMap().cells[loc].toDo(p);
@@ -126,6 +139,8 @@ public class Main {
                 System.out.println(p.name + " Lost!");
                 Player.allPlayers.remove(p);
                 Player.losers.add(p);
+            }catch (NumberFormatException e){
+                System.out.println("Wrong method format.");
             }
             endTime=System.nanoTime();
         }
