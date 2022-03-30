@@ -23,6 +23,10 @@ public class Land extends Purchasable {
 
     @Override
     public boolean build(Player player) {
+        if (!player.equals(owner)) {
+            System.out.println("sorry this land doesn't belong you.");
+            return false;
+        }
         if (numberOfFreeBuildings > 0) {
             if (buildNumCheck(player)) {
                 if (this.buildings == -1) {
