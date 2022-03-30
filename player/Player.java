@@ -93,7 +93,7 @@ public class Player {
         estatePrint();
     }
 
-    private boolean estatePrint() {
+    public boolean estatePrint() {
         if (estates.size() == 0) {
             System.out.println("You do not have any estate!");
             return false;
