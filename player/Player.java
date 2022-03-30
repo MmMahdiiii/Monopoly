@@ -135,6 +135,16 @@ public class Player {
     public int hashCode() {
         return Objects.hash(name);
     }
+    public int ranking(){
+       int i=1;
+       for (Player p: allPlayers){
+           if (p.wholeCredit()>this.wholeCredit())
+               i++;
+       }
+       return i;
+    }
+
 }
+
 
 
