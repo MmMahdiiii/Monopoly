@@ -27,10 +27,10 @@ public class Main {
 
         while (true) {
             try {
-                String  temp=scanner.nextLine();
+                String temp = scanner.nextLine();
                 if (!temp.startsWith("Time"))
                     throw new RuntimeException();
-                timeLimit=Integer.parseInt(temp.substring(5,temp.indexOf("min")-1));
+                timeLimit = Integer.parseInt(temp.substring(5, temp.indexOf("min") - 1));
                 if (temp.contains("min"))
                     break;
                 else
@@ -42,15 +42,24 @@ public class Main {
         System.out.println("Enter player's name (at least 2 , at last 4 players) then write 'start_game'.");
         outerLoop:
         while (true) {
-            if (allPlayers.size() < 4) {
+            if (allPlayers.size() < 5) {
                 String temp = scanner.next();
                 if (temp.equals("start_game")) {
                     if (allPlayers.size() < 2)
                         System.out.println("Players size is too low, please add more players then write start game.");
                     else
                         break;
-                } else
-                    allPlayers.add(new player.Player(temp));
+                } else {
+                    boolean flag = true;
+                    for (Player player : allPlayers) {
+                        if (player.name.equals(temp)) {
+                            System.out.println("this name already exist, use another name.");
+                            flag = false;
+                        }
+                    }
+                    if (flag)
+                        allPlayers.add(new player.Player(temp));
+                }
             } else {
                 System.out.println("Players capacity is full, Please write 'start_game'.");
                 while (true) {
@@ -71,10 +80,9 @@ public class Main {
          */
         int round = 1;
         System.out.println("round : " + round);
-        long startTime=System.nanoTime();
-        long endTime=System.nanoTime()+timeLimit* 2L;
-        boolean onTime = true;
-        for (int i = 0; Player.allPlayers.size() > 1 && endTime-startTime/60000000000L<timeLimit; i++) {
+        long startTime = System.nanoTime();
+        long endTime = System.nanoTime();
+        for (int i = 0; Player.allPlayers.size() > 1 && (endTime - startTime) / 60000000000L < timeLimit; i++) {
             if (i == Player.allPlayers.size()) {
                 i = 0;
                 round++;
@@ -87,19 +95,31 @@ public class Main {
                     dice = scanner.nextInt();
                     if (dice < 0 || dice > 6)
                         throw new Exception();
-                    if(dice == 6){
+                    if (dice == 6) {
                         System.out.println("Nice! you can roll dice again!");
-                        dice += scanner.nextInt();
+                        while (true) {
+                            try {
+                                int temp = scanner.nextInt();
+                                if (temp > 6 || temp < 0) {
+                                    throw new Exception();
+                                } else {
+                                    dice += temp;
+                                    break;
+                                }
+                            } catch (Exception e) {
+                                System.out.println("pls enter a valid number!");
+                            }
+                        }
                     }
                     break;
                 } catch (Exception e) {
                     System.out.println("pls enter a valid number!");
+                    scanner.nextLine();
                 }
             }
-
             Player p = Player.allPlayers.get(i);
             System.out.println(p.name + " left money : " + p.money + "$");
-            if(dice == 12){
+            if (dice == 12) {
                 Prison.putInPrison(p);
             }
             try {
@@ -108,30 +128,34 @@ public class Main {
                     p.location -= 24;
                 int loc = p.location;
                 System.out.println("You can command your method then enter \"Quit\" for end your tasks.");
-                String method = scanner.next();
+                scanner.nextLine();
+                String method = scanner.nextLine();
                 while (!method.equalsIgnoreCase("Quit")) {
-                    if (method.startsWith("build"))
-                        PlayGround.getMap().cells[Integer.parseInt(method.substring(6)) - 1].build(p);
-                    else if (method.startsWith("sell"))
-                        p.sell(Integer.parseInt(method.substring(5)));
-                    else if (method.startsWith("fly"))
-                        PlayGround.getMap().cells[loc].fly(p, Integer.parseInt(method.substring(4)));
-                    else if (method.startsWith("buy"))
-                        p.buy(PlayGround.getMap().cells[Integer.parseInt(method.substring(4)) - 1]);
-                    else if (method.equalsIgnoreCase("index"))
-                        System.out.println(p.location+1);
-                    else if (method.equalsIgnoreCase("property")){
-                        p.estatePrint();
-                    }
-                    else if(method.equalsIgnoreCase("time"))
-                        System.out.printf("remaining time= %d\n",timeLimit-System.nanoTime()-startTime);
-                    else if (method.equalsIgnoreCase("rank")){
-                        System.out.println(p.name+"'s rank is "+p.ranking());
-                    }
-                    else System.out.println("Wrong method format.");
+                    try {
+                        if (method.startsWith("build"))
+                            PlayGround.getMap().cells[p.location].build(p);
+                        else if (method.startsWith("sell"))
+                            p.sell(Integer.parseInt(method.substring(5)));
+                        else if (method.startsWith("fly"))
+                            PlayGround.getMap().cells[loc].fly(p, Integer.parseInt(method.substring(4)));
+                        else if (method.equalsIgnoreCase("buy"))
+                            p.buy(PlayGround.getMap().cells[p.location]);
+                        else if (method.equalsIgnoreCase("index"))
+                            System.out.println(p.location + 1);
+                        else if (method.equalsIgnoreCase("property")) {
+                            p.estatePrint();
+                        } else if (method.equalsIgnoreCase("time"))
+                            System.out.printf("remaining time= %d min\n", timeLimit - (System.nanoTime() - startTime) / 60000000000L);
+                        else if (method.equalsIgnoreCase("rank")) {
+                            System.out.println(p.name + "'s rank is " + p.ranking());
+                        } else System.out.println("Wrong method format.");
 
-
-                    method = scanner.next();
+                    } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+                        System.out.println("Wrong method format.");
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        System.out.println("this index is out of map.");
+                    }
+                    method = scanner.nextLine();
                 }
                 PlayGround.getMap().cells[loc].toDo(p);
             } catch (Lose lose) {
@@ -139,16 +163,12 @@ public class Main {
                 System.out.println(p.name + " Lost!");
                 Player.allPlayers.remove(p);
                 Player.losers.add(p);
-            }catch (NumberFormatException e){
-                System.out.println("Wrong method format.");
             }
-            endTime=System.nanoTime();
+            endTime = System.nanoTime();
         }
-        if(Player.allPlayers.size() == 1){
+        if (Player.allPlayers.size() == 1) {
             // mamad win
-        }
-        else
-        {
+        } else {
             // time over
         }
     }

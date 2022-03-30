@@ -32,16 +32,16 @@ public class Player {
     }
 
     public boolean sell(int index) {
-        if (index < 1 || index > 24){
-            System.out.println("your chosen number is invalid pls try again:");
-        }
+//        if (index < 1 || index > 24){
+//            System.out.println("your chosen number is invalid pls try again:");
+//        }
         Cell tempCell=PlayGround.getMap().cells[index-1];
         if (!(tempCell instanceof Purchasable)){
             System.out.println("This item isn't purchasable");
             return false;
         }
         else {
-            if (!((Purchasable) tempCell).owner.equals(this)){
+            if (!this.equals(((Purchasable) tempCell).owner)){
                 System.out.println("This item doesn't belong you.");
                 return false;
             }
@@ -65,6 +65,7 @@ public class Player {
         payment(item.value);
         item.owner = this;
         estates.add(item);
+        System.out.println("you bought the item.");
         return true;
     }
 
@@ -99,7 +100,7 @@ public class Player {
             return false;
         }
         for (int i = 0; i < estates.size(); i++) {
-            System.out.printf("%d- %s (%d)\n", (i + 1), estates.get(i).getClass().getSimpleName(), estates.get(i).location);
+            System.out.printf("%d- %s (%d)\n", (i + 1), estates.get(i).getClass().getSimpleName(), estates.get(i).location+1);
         }
         return true;
     }
