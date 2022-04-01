@@ -2,6 +2,7 @@ import cell.bankOwned.Prison;
 import player.PlayGround;
 import player.Player;
 
+import java.util.Collections;
 import java.util.Scanner;
 
 import player.*;
@@ -70,6 +71,25 @@ public class Main {
                 }
             }
         }
+        System.out.println("Roll your turn dice.    Notice:if some dices are drawn,the players who joined sooner ,play sooner.");
+        for (int i=0;i<Player.allPlayers.size();i++){
+            try {
+                System.out.println("Enter "+Player.allPlayers.get(i).name+"'s priority turn dice:");
+                int temp=scanner.nextInt();
+                if (temp<0||temp>6)
+                    throw new Exception();
+                Player.allPlayers.get(i).priorityDice=temp;
+            }catch (Exception e){
+                System.out.println("pls enter a valid number!");
+                i--;
+            }
+        }
+        for (int i=0;i<Player.allPlayers.size()-1;i++)
+            for (int j=0;j<Player.allPlayers.size()-i-1;j++){
+                if (Player.allPlayers.get(j).priorityDice<Player.allPlayers.get(j+1).priorityDice){
+                    Collections.swap(Player.allPlayers,j,j+1);
+                }
+            }
         /*
          * {
          * allplayer... sort
