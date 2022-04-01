@@ -25,6 +25,7 @@ public class Prison extends BankOwned {
         return false;
     }
 
+
     public static boolean putInPrison(Player player) {
         if (prisoners.contains(player))
             return false;
@@ -32,5 +33,15 @@ public class Prison extends BankOwned {
         player.moveTo(12);
         System.out.println("Welcome to the dungeon!");
         return true;
+    }
+
+    public static boolean putOutPrison(Player player) {
+        if (prisoners.contains(player)) {
+            System.out.println("Enjoy from your freedom =)");
+            prisoners.remove(player);
+            return true;
+        }
+        System.out.println("You are not in dungeon!!!");
+        return false;
     }
 }

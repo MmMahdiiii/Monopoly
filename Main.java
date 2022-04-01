@@ -2,19 +2,18 @@ import cell.bankOwned.Prison;
 import player.PlayGround;
 import player.Player;
 
-import java.lang.invoke.SerializedLambda;
 import java.util.Scanner;
 
 import player.*;
 import cell.*;
 
-import static player.Player.allPlayers;
 
 public class Main {
+    static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
         int timeLimit = 0;
         System.out.println("Write 'create_game' to create a game.");
-        Scanner scanner = new Scanner(System.in);
         while (true) {
             if (scanner.next().equals("create_game")) {
                 break;
@@ -42,23 +41,23 @@ public class Main {
         System.out.println("Enter player's name (at least 2 , at last 4 players) then write 'start_game'.");
         outerLoop:
         while (true) {
-            if (allPlayers.size() < 5) {
+            if (Player.allPlayers.size() < 5) {
                 String temp = scanner.next();
                 if (temp.equals("start_game")) {
-                    if (allPlayers.size() < 2)
+                    if (Player.allPlayers.size() < 2)
                         System.out.println("Players size is too low, please add more players then write start game.");
                     else
                         break;
                 } else {
                     boolean flag = true;
-                    for (Player player : allPlayers) {
+                    for (Player player : Player.allPlayers) {
                         if (player.name.equals(temp)) {
                             System.out.println("this name already exist, use another name.");
                             flag = false;
                         }
                     }
                     if (flag)
-                        allPlayers.add(new player.Player(temp));
+                        Player.allPlayers.add(new player.Player(temp));
                 }
             } else {
                 System.out.println("Players capacity is full, Please write 'start_game'.");
@@ -88,7 +87,12 @@ public class Main {
                 round++;
                 System.out.println("round : " + round);
             }
-            System.out.println("turn " + allPlayers.get(i).name);
+            Player p = Player.allPlayers.get(i);
+            System.out.println("turn " + p.name);
+            if (Prison.prisoners.contains(p)) {
+                prisonersTurn(p);
+            }
+
             int dice;
             while (true) {
                 try {
@@ -117,7 +121,6 @@ public class Main {
                     scanner.nextLine();
                 }
             }
-            Player p = Player.allPlayers.get(i);
             System.out.println(p.name + " left money : " + p.money + "$");
             if (dice == 12) {
                 Prison.putInPrison(p);
@@ -172,4 +175,40 @@ public class Main {
             // time over
         }
     }
+
+    private static void prisonersTurn(Player player) {
+        System.out.println("do you prefer to pay 50 for your freedom or try your luck?");
+        System.out.println("enter \"free\" to pay");
+        System.out.println("enter \"chance\" to try your luck");
+        Outer:
+        while (true) {
+            String s = scanner.next();
+            try {
+                if (!s.equalsIgnoreCase("free") && !s.equalsIgnoreCase("chance"))
+                    throw new Exception();
+                if (s.equalsIgnoreCase("chance")) {
+                    while (true) {
+                        try {
+                            int dice = scanner.nextInt();
+                            if (dice < 0 || dice > 6)
+                                throw new Exception();
+                            if (dice == 1) {
+                                Prison.putOutPrison(player);
+                            }
+                            break Outer;
+                        } catch (Exception e) {
+                            System.out.println("pls enter a valid number!");
+                        }
+                    }
+                } else {
+                    if (PlayGround.getMap().cells[12].free(player))
+                        break;
+                }
+
+            } catch (Exception e) {
+                System.out.println("Unexpected command: " + s);
+            }
+        }
+    }
+
 }
