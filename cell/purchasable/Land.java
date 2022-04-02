@@ -83,7 +83,7 @@ public class Land extends Purchasable {
     }
     @Override
     public boolean toDo(Player player) throws Lose {
-        if (player.equals(owner))
+        if (owner == null || player.equals(owner))
             return true;
         int cost=calculateRent();
         if (!player.canPay(cost)){

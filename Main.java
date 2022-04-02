@@ -43,7 +43,7 @@ public class Main {
         outerLoop:
         while (true) {
             if (Player.allPlayers.size() < 5) {
-                String temp = scanner.next();
+                String temp = scanner.nextLine();
                 if (temp.equals("start_game")) {
                     if (Player.allPlayers.size() < 2)
                         System.out.println("Players size is too low, please add more players then write start game.");
@@ -72,22 +72,22 @@ public class Main {
             }
         }
         System.out.println("Roll your turn dice.    Notice:if some dices are drawn,the players who joined sooner ,play sooner.");
-        for (int i=0;i<Player.allPlayers.size();i++){
+        for (int i = 0; i < Player.allPlayers.size(); i++) {
             try {
-                System.out.println("Enter "+Player.allPlayers.get(i).name+"'s priority turn dice:");
-                int temp=scanner.nextInt();
-                if (temp<0||temp>6)
+                System.out.println("Enter " + Player.allPlayers.get(i).name + "'s priority turn dice:");
+                int temp = scanner.nextInt();
+                if (temp < 1 || temp > 6)
                     throw new Exception();
-                Player.allPlayers.get(i).priorityDice=temp;
-            }catch (Exception e){
+                Player.allPlayers.get(i).priorityDice = temp;
+            } catch (Exception e) {
                 System.out.println("pls enter a valid number!");
                 i--;
             }
         }
-        for (int i=0;i<Player.allPlayers.size()-1;i++)
-            for (int j=0;j<Player.allPlayers.size()-i-1;j++){
-                if (Player.allPlayers.get(j).priorityDice<Player.allPlayers.get(j+1).priorityDice){
-                    Collections.swap(Player.allPlayers,j,j+1);
+        for (int i = 0; i < Player.allPlayers.size() - 1; i++)
+            for (int j = 0; j < Player.allPlayers.size() - i - 1; j++) {
+                if (Player.allPlayers.get(j).priorityDice < Player.allPlayers.get(j + 1).priorityDice) {
+                    Collections.swap(Player.allPlayers, j, j + 1);
                 }
             }
         /*
@@ -109,15 +109,17 @@ public class Main {
             }
             Player p = Player.allPlayers.get(i);
             System.out.println("turn " + p.name);
+            System.out.println(p.name + " left money : " + p.money + "$");
             if (Prison.prisoners.contains(p)) {
                 prisonersTurn(p);
+                continue;
             }
-
+            System.out.println("roll your dice");
             int dice;
             while (true) {
                 try {
                     dice = scanner.nextInt();
-                    if (dice < 0 || dice > 6)
+                    if (dice < 1 || dice > 6)
                         throw new Exception();
                     if (dice == 6) {
                         System.out.println("Nice! you can roll dice again!");
@@ -141,9 +143,9 @@ public class Main {
                     scanner.nextLine();
                 }
             }
-            System.out.println(p.name + " left money : " + p.money + "$");
             if (dice == 12) {
                 Prison.putInPrison(p);
+                continue;
             }
             try {
                 p.location += dice;
@@ -159,14 +161,16 @@ public class Main {
                             PlayGround.getMap().cells[p.location].build(p);
                         else if (method.startsWith("sell"))
                             p.sell(Integer.parseInt(method.substring(5)));
+                        else if (method.startsWith("invest"))
+                            PlayGround.getMap().cells[loc].invest(p);
                         else if (method.startsWith("fly"))
-                            PlayGround.getMap().cells[loc].fly(p, Integer.parseInt(method.substring(4)));
+                            PlayGround.getMap().cells[loc].fly(p, Integer.parseInt(method.substring(4)) - 1);
                         else if (method.equalsIgnoreCase("buy"))
                             p.buy(PlayGround.getMap().cells[p.location]);
                         else if (method.equalsIgnoreCase("index"))
                             System.out.println(p.location + 1);
                         else if (method.equalsIgnoreCase("property")) {
-                            p.estatePrint();
+                            p.property();
                         } else if (method.equalsIgnoreCase("time"))
                             System.out.printf("remaining time= %d min\n", timeLimit - (System.nanoTime() - startTime) / 60000000000L);
                         else if (method.equalsIgnoreCase("rank")) {
@@ -209,8 +213,9 @@ public class Main {
                 if (s.equalsIgnoreCase("chance")) {
                     while (true) {
                         try {
+                            System.out.println("roll your dice");
                             int dice = scanner.nextInt();
-                            if (dice < 0 || dice > 6)
+                            if (dice < 1 || dice > 6)
                                 throw new Exception();
                             if (dice == 1) {
                                 Prison.putOutPrison(player);

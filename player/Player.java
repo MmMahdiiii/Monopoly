@@ -6,6 +6,7 @@ import cell.purchasable.Purchasable;
 
 import java.security.PublicKey;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -36,13 +37,12 @@ public class Player {
 //        if (index < 1 || index > 24){
 //            System.out.println("your chosen number is invalid pls try again:");
 //        }
-        Cell tempCell=PlayGround.getMap().cells[index-1];
-        if (!(tempCell instanceof Purchasable)){
+        Cell tempCell = PlayGround.getMap().cells[index - 1];
+        if (!(tempCell instanceof Purchasable)) {
             System.out.println("This item isn't purchasable");
             return false;
-        }
-        else {
-            if (!this.equals(((Purchasable) tempCell).owner)){
+        } else {
+            if (!this.equals(((Purchasable) tempCell).owner)) {
                 System.out.println("This item doesn't belong you.");
                 return false;
             }
@@ -50,6 +50,7 @@ public class Player {
         money += ((Purchasable) tempCell).value / 2;
         ((Purchasable) tempCell).owner = null;
         estates.remove(tempCell);
+        System.out.println("you soled the item");
         return true;
     }
 
@@ -95,13 +96,44 @@ public class Player {
         estatePrint();
     }
 
+    static public boolean swap_wealth(String s1, String s2) {
+        if (!containsThisName(s1) || !containsThisName(s2)) {
+            System.out.println("This user is broke");
+            return false;
+        }
+        Player player1 = getPlayer(s1);
+        Player player2 = getPlayer(s2);
+
+        ArrayList<cell.purchasable.Purchasable> temp;
+        temp = player1.estates;
+        player1.estates = player2.estates;
+        player2.estates = temp;
+        double tempMoney = player1.money;
+        player1.money = player2.money;
+        player2.money = tempMoney;
+        return true;
+        
+    }
+
+    static private boolean containsThisName(String s) {
+        return getPlayer(s) != null;
+    }
+
+    static private Player getPlayer(String s) {
+        for (Player p : allPlayers) {
+            if (p.name.equals(s))
+                return p;
+        }
+        return null;
+    }
+
     public boolean estatePrint() {
         if (estates.size() == 0) {
             System.out.println("You do not have any estate!");
             return false;
         }
         for (int i = 0; i < estates.size(); i++) {
-            System.out.printf("%d- %s (%d)\n", (i + 1), estates.get(i).getClass().getSimpleName(), estates.get(i).location+1);
+            System.out.printf("%d- %s (%d)\n", (i + 1), estates.get(i).getClass().getSimpleName(), estates.get(i).location + 1);
         }
         return true;
     }
@@ -137,13 +169,14 @@ public class Player {
     public int hashCode() {
         return Objects.hash(name);
     }
-    public int ranking(){
-       int i=1;
-       for (Player p: allPlayers){
-           if (p.wholeCredit()>this.wholeCredit())
-               i++;
-       }
-       return i;
+
+    public int ranking() {
+        int i = 1;
+        for (Player p : allPlayers) {
+            if (p.wholeCredit() > this.wholeCredit())
+                i++;
+        }
+        return i;
     }
 
 }

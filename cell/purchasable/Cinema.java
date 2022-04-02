@@ -28,7 +28,7 @@ public class Cinema extends Purchasable{
 
     @Override
     public boolean toDo(Player player) throws Lose {
-        if (player.equals(owner))
+        if (owner == null || player.equals(owner))
             return true;
         int cost = getTicket();
         if (!player.canPay(cost))

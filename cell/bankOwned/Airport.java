@@ -14,9 +14,11 @@ public class Airport extends BankOwned {
                 && destination != this.location) {
             if (player.payment(50.0)) {
                 player.moveTo(destination);
+                System.out.println("you arrived =)");
                 return true;
             }
         }
+        System.out.println("you cant fly to " + destination);
         return false;
     }
 }
