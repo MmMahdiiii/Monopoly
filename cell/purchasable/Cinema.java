@@ -20,7 +20,7 @@ public class Cinema extends Purchasable{
         PlayGround map=PlayGround.getMap();
         for(int i=0;i<map.cells.length;i++){
             if(map.cells[i] instanceof Cinema)
-                if (((Cinema) map.cells[i]).owner.equals(this.owner))
+                if (((Cinema) map.cells[i]).owner!=null&&((Cinema) map.cells[i]).owner.equals(this.owner))
                     result++;
         }
         return --result;
@@ -36,6 +36,7 @@ public class Cinema extends Purchasable{
         while (!player.payment(cost)){
             player.haveToSellSomething(cost);
         }
+        this.owner.money+=cost;
         return true;
     }
 }
