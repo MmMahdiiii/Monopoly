@@ -4,13 +4,10 @@ import cell.bankOwned.BankOwned;
 import cell.Cell;
 import cell.purchasable.Purchasable;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Objects;
-import java.util.Scanner;
 
-public class Player {
+public class Player implements propertyInterface {
     public final String name;
     public double money;
     public int location;
@@ -90,12 +87,11 @@ public class Player {
     int index() {
         return location + 1;
     }
-
+    @Override
     public void property() {
         System.out.println("Left money : " + money + "$");
         estatePrint();
     }
-
     static public boolean swap_wealth(String s1, String s2) {
         if (!containsThisName(s1) || !containsThisName(s2)) {
             System.out.println("This user is broke");
@@ -111,6 +107,7 @@ public class Player {
         double tempMoney = player1.money;
         player1.money = player2.money;
         player2.money = tempMoney;
+        System.out.println("Swap wealth completed.");
         return true;
         
     }
