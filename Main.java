@@ -198,6 +198,13 @@ public class Main {
         } else {
             // time over
         }
+        if (i == Player.allPlayers.size() - 1) {
+            System.out.println("you can swap players' wealth by command \"swap_wealth (first_player)(second_player)\"\n" +
+                    "or enter anything else to skip");
+            if (scanner.next().startsWith("swap_wealth")) {
+                Player.swap_wealth(scanner.next(), scanner.next());
+            }
+        }
     }
 
     private static void prisonersTurn(Player player) {

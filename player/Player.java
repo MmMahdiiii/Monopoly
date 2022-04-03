@@ -103,7 +103,12 @@ public class Player {
         }
         Player player1 = getPlayer(s1);
         Player player2 = getPlayer(s2);
-
+        for (Purchasable p : player1.estates) {
+            p.owner = player2;
+        }
+        for (Purchasable p : player2.estates) {
+            p.owner = player1;
+        }
         ArrayList<cell.purchasable.Purchasable> temp;
         temp = player1.estates;
         player1.estates = player2.estates;
@@ -112,7 +117,7 @@ public class Player {
         player1.money = player2.money;
         player2.money = tempMoney;
         return true;
-        
+
     }
 
     static private boolean containsThisName(String s) {
