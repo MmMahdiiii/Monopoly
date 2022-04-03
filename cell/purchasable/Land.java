@@ -15,7 +15,7 @@ public class Land extends Purchasable {
     private boolean buildNumCheck(Player player) {
         for (int i = 0; i < player.estates.size(); i++) {
             if (player.estates.get(i) instanceof Land)
-                if (((Land) player.estates.get(i)).buildings < this.buildings)
+                if (((Land) player.estates.get(i)).buildings < this.buildings &&((Land) player.estates.get(i)).buildings!=-1)
                     return false;
         }
         return true;
@@ -75,7 +75,7 @@ public class Land extends Purchasable {
         for(int i=0;i<map.cells.length;i++){
             if(map.cells[i] instanceof Purchasable){
                 if (((Purchasable) map.cells[i]).color.equals(this.color))
-                if (!((Purchasable) map.cells[i]).owner.equals(this.owner))
+                if (((Purchasable) map.cells[i]).owner==null||!((Purchasable) map.cells[i]).owner.equals(this.owner))
                     return false;
             }
         }
@@ -92,6 +92,7 @@ public class Land extends Purchasable {
         while (!player.payment(cost)){
             player.haveToSellSomething(cost);
         }
+        this.owner.money+=calculateRent();
         return true;
     }
 }
