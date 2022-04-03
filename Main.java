@@ -177,8 +177,7 @@ public class Main {
                             PlayGround.getMap().cells[loc].fly(p, Integer.parseInt(method.substring(4)) - 1);
                         else if (method.startsWith("swap wealth")) {
                             Player.swap_wealth(method.split("\s")[2], method.split("\s")[3]);
-                        }
-                        else if (method.equalsIgnoreCase("buy"))
+                        } else if (method.equalsIgnoreCase("buy"))
                             p.buy(PlayGround.getMap().cells[p.location]);
                         else if (method.equalsIgnoreCase("index"))
                             System.out.println(p.location + 1);
@@ -205,46 +204,47 @@ public class Main {
                 Player.losers.add(p);
             }
             endTime = System.nanoTime();
+            if (i == Player.allPlayers.size() - 1) {
+                System.out.println("you can swap players' wealth by command \"swap_wealth (first_player)(second_player)\"\n" +
+                        "or enter anything else to skip");
+                if (scanner.next().startsWith("swap_wealth")) {
+                    Player.swap_wealth(scanner.next(), scanner.next());
+                }
+            }
         }
         if (Player.allPlayers.size() == 1) {
-            System.out.println(ANSI_GREEN+Player.allPlayers.get(0).name+", YOU WON."+ANSI_RESET);
-            for (Player player:Player.losers){
-                System.out.println(ANSI_RED+player.name+", YOU LOST."+ANSI_RESET);
+            System.out.println(ANSI_GREEN + Player.allPlayers.get(0).name + ", YOU WON." + ANSI_RESET);
+            for (Player player : Player.losers) {
+                System.out.println(ANSI_RED + player.name + ", YOU LOST." + ANSI_RESET);
             }
         } else {
             try {
-                Player temp=Player.allPlayers.get(0);
-                for (Player player:Player.allPlayers) {
-                    if (player.ranking()< temp.ranking())
-                        temp=player;
-                    if (player.ranking()==temp.ranking()&&!player.equals(Player.allPlayers.get(0)))
+                Player temp = Player.allPlayers.get(0);
+                for (Player player : Player.allPlayers) {
+                    if (player.ranking() < temp.ranking())
+                        temp = player;
+                    if (player.ranking() == temp.ranking() && !player.equals(Player.allPlayers.get(0)))
                         throw new Exception();
                 }
-                System.out.println(temp.name+ANSI_GREEN+", YOU WON."+ANSI_RESET);
-                for (Player player:Player.allPlayers) {
+                System.out.println(temp.name + ANSI_GREEN + ", YOU WON." + ANSI_RESET);
+                for (Player player : Player.allPlayers) {
                     if (!player.equals(temp))
-                        System.out.println(player.name+ANSI_RED+", YOU LOST."+ANSI_RESET);
+                        System.out.println(player.name + ANSI_RED + ", YOU LOST." + ANSI_RESET);
                 }
-                for (Player player:Player.losers) {
-                    System.out.println(player.name+ANSI_RED+", YOU LOST."+ANSI_RESET);
+                for (Player player : Player.losers) {
+                    System.out.println(player.name + ANSI_RED + ", YOU LOST." + ANSI_RESET);
                 }
-            }catch (Exception e){
-                System.out.println(ANSI_RED+"We have no Winner,duo to same wealth."+ANSI_RESET);
-                for (Player player:Player.allPlayers) {
-                        System.out.println(player.name+ANSI_RED+",YOU LOST."+ANSI_RESET);
+            } catch (Exception e) {
+                System.out.println(ANSI_RED + "We have no Winner,duo to same wealth." + ANSI_RESET);
+                for (Player player : Player.allPlayers) {
+                    System.out.println(player.name + ANSI_RED + ",YOU LOST." + ANSI_RESET);
                 }
-                for (Player player:Player.losers) {
-                    System.out.println(player.name+ANSI_RED+",YOU LOST."+ANSI_RESET);
+                for (Player player : Player.losers) {
+                    System.out.println(player.name + ANSI_RED + ",YOU LOST." + ANSI_RESET);
                 }
             }
 
-        }
-        if (i == Player.allPlayers.size() - 1) {
-            System.out.println("you can swap players' wealth by command \"swap_wealth (first_player)(second_player)\"\n" +
-                    "or enter anything else to skip");
-            if (scanner.next().startsWith("swap_wealth")) {
-                Player.swap_wealth(scanner.next(), scanner.next());
-            }
+
         }
     }
 
