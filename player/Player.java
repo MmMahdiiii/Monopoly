@@ -12,6 +12,7 @@ public class Player implements propertyInterface {
     public double money;
     public int location;
     public int priorityDice;
+    public boolean fundFlag=false;
     public ArrayList<cell.purchasable.Purchasable> estates = new ArrayList<cell.purchasable.Purchasable>();
     private ArrayList<Bonus> bonuses = new ArrayList<Bonus>();
     public static ArrayList<Player> allPlayers = new ArrayList<Player>();
@@ -80,7 +81,7 @@ public class Player implements propertyInterface {
     public boolean moveTo(int destination) {
         if (destination < 0 || destination > 23)
             return false;
-        location = destination;
+        this.location = destination;
         return true;
     }
 
@@ -112,6 +113,12 @@ public class Player implements propertyInterface {
         double tempMoney = player1.money;
         player1.money = player2.money;
         player2.money = tempMoney;
+        Double tempInvest=player1.fund;
+        player1.fund=player2.fund;
+        player2.fund=tempInvest;
+        boolean tempFundFlag=player1.fundFlag;
+        player1.fundFlag=player2.fundFlag;
+        player2.fundFlag=tempFundFlag;
         System.out.println("Swap wealth completed.");
         return true;
 

@@ -11,14 +11,14 @@ public class Airport extends BankOwned {
     @Override
     public boolean fly(Player player, int destination) {
         if ((destination == 2 || destination == 10 || destination == 19)
-                && destination != this.location) {
+                && destination != player.location) {
             if (player.payment(50.0)) {
                 player.moveTo(destination);
                 System.out.println("you arrived =)");
                 return true;
             }
         }
-        System.out.println("you cant fly to " + destination);
+        System.out.println("you cant fly to " + (destination+1));
         return false;
     }
 }

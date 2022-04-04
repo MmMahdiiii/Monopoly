@@ -36,7 +36,7 @@ public class Chance extends BankOwned {
             player.giveBonus(Bonus.escapeFromTax);
             return true;
         } else if (rand == 6) {
-            if(player.canPay((Player.allPlayers.size() - 1) * 10))
+            if(!player.canPay((Player.allPlayers.size() - 1) * 10))
                 throw new Lose("you do not have enough money to pay 10 dollars to each players");
             if (player.payment((Player.allPlayers.size() - 1) * 10)) {
                 for (Player i : Player.allPlayers) {

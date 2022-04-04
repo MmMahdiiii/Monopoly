@@ -175,9 +175,7 @@ public class Main {
                             PlayGround.getMap().cells[loc].invest(p);
                         else if (method.startsWith("fly"))
                             PlayGround.getMap().cells[loc].fly(p, Integer.parseInt(method.substring(4)) - 1);
-                        else if (method.startsWith("swap wealth")) {
-                            Player.swap_wealth(method.split("\s")[2], method.split("\s")[3]);
-                        } else if (method.equalsIgnoreCase("buy"))
+                        else if (method.equalsIgnoreCase("buy"))
                             p.buy(PlayGround.getMap().cells[p.location]);
                         else if (method.equalsIgnoreCase("index"))
                             System.out.println(p.location + 1);
@@ -204,11 +202,15 @@ public class Main {
                 Player.losers.add(p);
             }
             endTime = System.nanoTime();
-            if (i == Player.allPlayers.size() - 1) {
-                System.out.println("you can swap players' wealth by command \"swap_wealth (first_player)(second_player)\"\n" +
-                        "or enter anything else to skip");
-                if (scanner.next().startsWith("swap_wealth")) {
-                    Player.swap_wealth(scanner.next(), scanner.next());
+            while (i == Player.allPlayers.size() - 1) {
+                System.out.println("you can swap players' wealth by command \"swap wealth (first_player)(second_player)\"\n" +
+                        "or enter \"Quit\" to skip");
+                String method = scanner.nextLine();
+                if (method.startsWith("swap wealth")) {
+                    Player.swap_wealth(method.split("\s")[2], method.split("\s")[3]);
+                    break;
+                } else if (method.equalsIgnoreCase("Quit")) {
+                    break;
                 }
             }
         }
