@@ -2,6 +2,7 @@ import cell.bankOwned.Prison;
 import player.PlayGround;
 import player.Player;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -225,7 +226,7 @@ public class Main {
                 for (Player player : Player.allPlayers) {
                     if (player.ranking() < temp.ranking())
                         temp = player;
-                    if (player.ranking() == temp.ranking() && !player.equals(Player.allPlayers.get(0)))
+                    if (player.ranking() == temp.ranking() && player != temp)
                         throw new Exception();
                 }
                 System.out.println(temp.name + ANSI_GREEN + ", YOU WON." + ANSI_RESET);
