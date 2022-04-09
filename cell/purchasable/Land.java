@@ -6,7 +6,7 @@ import player.*;
 
 public class Land extends Purchasable {
     public int buildings = 0;//-1 means Hotel
-    static int numberOfFreeBuildings = 20;
+    static int numberOfFreeBuildings = Player.allPlayers.size()*5;
 
     public Land(int location, double value, Color color) {
         super(location, value, color);
