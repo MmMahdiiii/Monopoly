@@ -29,6 +29,11 @@ public class Prison extends BankOwned {
     public static boolean putInPrison(Player player) {
         if (prisoners.contains(player))
             return false;
+        if (player.bonuses.contains(Bonus.escapeFromDungeon)) {
+            System.out.println("you had a chance to skip prison =)");
+            player.bonuses.remove(Bonus.escapeFromDungeon);
+            return true;
+        }
         prisoners.add(player);
         player.moveTo(12);
         System.out.println("Welcome to the dungeon!");

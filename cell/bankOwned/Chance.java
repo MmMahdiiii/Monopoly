@@ -3,6 +3,9 @@ package cell.bankOwned;
 import cell.Lose;
 import player.*;
 import cell.Lose;
+
+import java.util.Random;
+
 public class Chance extends BankOwned {
     public Chance(int loc) {
         super(loc);
@@ -10,7 +13,8 @@ public class Chance extends BankOwned {
 
     @Override
     public boolean toDo(Player player) throws Lose {
-        int rand = (int) (Math.random() * 7);
+        Random random=new Random();
+        int rand =  random.nextInt()%7;
         if (rand == 0) {
             System.out.println("You won 200 dollars =)");
             player.money += 200.0;
@@ -25,7 +29,7 @@ public class Chance extends BankOwned {
             return true;
         } else if (rand == 3) {
             System.out.println("You moved to 3 steps further ^-^");
-            player.moveTo(player.location + 3);
+            player.moveTo(2);
             return true;
         } else if (rand == 4) {
             System.out.println("Now you have a chance to skip the dungeon for 1 time =)");

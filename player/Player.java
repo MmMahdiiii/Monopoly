@@ -14,7 +14,7 @@ public class Player implements propertyInterface {
     public int priorityDice;
     public boolean fundFlag=false;
     public ArrayList<cell.purchasable.Purchasable> estates = new ArrayList<cell.purchasable.Purchasable>();
-    private ArrayList<Bonus> bonuses = new ArrayList<Bonus>();
+    public ArrayList<Bonus> bonuses = new ArrayList<Bonus>();
     public static ArrayList<Player> allPlayers = new ArrayList<Player>();
     public static ArrayList<Player> losers = new ArrayList<Player>();
     public Double fund = null;
